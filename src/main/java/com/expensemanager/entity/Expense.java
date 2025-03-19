@@ -1,10 +1,12 @@
 package com.expensemanager.entity;
 
+import com.expensemanager.dto.ExpenseCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -16,8 +18,16 @@ public class Expense {
     private String description;
     private BigDecimal amount;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Enumerated(EnumType.STRING)  // If using Enum for category
+    private ExpenseCategory category;
+
+    private LocalDate createDate;
+
+    private Long userId;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
+
+
 
 }
